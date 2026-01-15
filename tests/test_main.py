@@ -1,8 +1,13 @@
 """Tests for the Screenplay Writer Agent."""
 
+import os
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
+
+# SET TEST ENVIRONMENT VARIABLES TO PREVENT API KEY ERRORS
+os.environ["OPENROUTER_API_KEY"] = "test-key-for-ci"
+os.environ["OPENAI_API_KEY"] = "test-key-for-ci"
 
 from screenplay_writer_agent.main import handler
 
