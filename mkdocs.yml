@@ -1,0 +1,52 @@
+site_name: screenplay-writer-agent
+repo_url: https://github.com/Paraschamoli/screenplay-writer-agent
+site_url: https://Paraschamoli.github.io/screenplay-writer-agent
+site_description: Screenplay Writer Agent is an AI-powered creative assistant that helps write, structure, and refine screenplays by generating scenes, dialogues, character arcs, and story flow in standard screenplay format.
+site_author: Paras Chamoli
+edit_uri: edit/main/docs/
+repo_name: Paraschamoli/screenplay-writer-agent
+copyright: Maintained by <a href="https://Paraschamoli.com">Paraschamoli</a>.
+
+nav:
+  - Home: index.md
+  - Modules: modules.md
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: ["src/screenplay_writer_agent"]
+theme:
+  name: material
+  feature:
+    tabs: true
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Paraschamoli/screenplay-writer-agent
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/screenplay-writer-agent
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
