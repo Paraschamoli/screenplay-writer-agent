@@ -34,7 +34,7 @@ classifiers = [
 [project.urls]
 Homepage = "https://Paraschamoli.github.io/screenplay-writer-agent/"
 Repository = "https://github.com/Paraschamoli/screenplay-writer-agent"
-Documentation = "https://Paraschamoli.github.io/screenplay-writer-agent/"
+Documentation = "https://github.com/Paraschamoli/screenplay-writer-agent#readme"
 
 [dependency-groups]
 dev = [

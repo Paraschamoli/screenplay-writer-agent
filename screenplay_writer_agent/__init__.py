@@ -11,16 +11,16 @@
 
 from screenplay_writer_agent.__version__ import __version__
 from screenplay_writer_agent.main import (
+    cleanup,
     handler,
     initialize_crew,
-    cleanup,
     main,
 )
 
 __all__ = [
     "__version__",
+    "cleanup",
     "handler",
     "initialize_crew",
-    "cleanup",
     "main",
 ]

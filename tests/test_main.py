@@ -14,7 +14,7 @@ async def test_handler_returns_response():
 
     # Mock screenplay response (string, not MagicMock)
     mock_screenplay = "INT. LAB - DAY\n\nDR. ALEX works on an AI terminal..."
-    
+
     with (
         patch("screenplay_writer_agent.main._initialized", True),
         patch("screenplay_writer_agent.main.run_crew", new_callable=AsyncMock, return_value=mock_screenplay),
@@ -30,15 +30,15 @@ async def test_handler_returns_response():
 @pytest.mark.asyncio
 async def test_handler_with_screenplay_query():
     """Test that handler processes screenplay writing queries correctly."""
-    messages = [
-        {"role": "user", "content": "Create a romantic comedy scene between two strangers"}
-    ]
+    messages = [{"role": "user", "content": "Create a romantic comedy scene between two strangers"}]
 
     mock_screenplay = "EXT. PARK - DAY\n\nSARAH's dog runs toward MARK..."
 
     with (
         patch("screenplay_writer_agent.main._initialized", True),
-        patch("screenplay_writer_agent.main.run_crew", new_callable=AsyncMock, return_value=mock_screenplay) as mock_run,
+        patch(
+            "screenplay_writer_agent.main.run_crew", new_callable=AsyncMock, return_value=mock_screenplay
+        ) as mock_run,
     ):
         result = await handler(messages)
 
@@ -59,7 +59,9 @@ async def test_handler_initialization():
     with (
         patch("screenplay_writer_agent.main._initialized", False),
         patch("screenplay_writer_agent.main.initialize_crew", new_callable=AsyncMock) as mock_init,
-        patch("screenplay_writer_agent.main.run_crew", new_callable=AsyncMock, return_value=mock_screenplay) as mock_run,
+        patch(
+            "screenplay_writer_agent.main.run_crew", new_callable=AsyncMock, return_value=mock_screenplay
+        ) as mock_run,
         patch("screenplay_writer_agent.main._init_lock", new_callable=MagicMock()) as mock_lock,
     ):
         # Configure the lock to work as an async context manager
@@ -110,12 +112,7 @@ async def test_handler_race_condition_prevention():
 @pytest.mark.asyncio
 async def test_handler_with_character_development_query():
     """Test that handler can process character development queries."""
-    messages = [
-        {
-            "role": "user",
-            "content": "Develop a character for a cyberpunk detective story"
-        }
-    ]
+    messages = [{"role": "user", "content": "Develop a character for a cyberpunk detective story"}]
 
     mock_screenplay = "FADE IN:\n\nEXT. CITY - NIGHT\n\nDetective Raine investigates..."
 
@@ -135,7 +132,7 @@ async def test_handler_empty_user_input():
     """Test that handler handles empty user input gracefully."""
     messages = [
         {"role": "system", "content": "You are a screenplay writer"},
-        {"role": "assistant", "content": "How can I help you?"}
+        {"role": "assistant", "content": "How can I help you?"},
         # No user message
     ]
 
@@ -160,7 +157,7 @@ async def test_handler_crew_exception():
     ):
         # Make run_crew raise an exception
         mock_run.side_effect = Exception("Crew execution failed")
-        
+
         result = await handler(messages)
 
     assert result is not None
@@ -178,13 +175,13 @@ async def test_handler_edge_case_malformed_messages():
     assert isinstance(result, str)
     assert "ERROR" in result.upper()
     assert "Invalid input" in result
-    
+
     # Test with empty list
     result = await handler([])
     assert result is not None
     assert isinstance(result, str)
     assert "Please provide" in result
-    
+
     # Test with list but no user messages
     result = await handler([{"role": "system", "content": "test"}])
     assert result is not None
